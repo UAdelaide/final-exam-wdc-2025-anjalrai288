@@ -84,7 +84,7 @@
             if(!res.ok) throw new Error('Failed to fetch current user');
             currentUser.value = awaitres.json();
           } catch (err) {
-            error.
+            error.value = 'Unable to get '
           }
 
           }
