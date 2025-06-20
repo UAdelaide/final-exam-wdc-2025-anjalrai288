@@ -67,7 +67,7 @@ let db;
             location VARCHAR(255) NOT NULL,
             status ENUM('open', 'accepted', 'completed', 'cancelled') DEFAULT 'open',
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (dog_id) REFERENCES Dogs(dog_id),
+            FOREIGN KEY (dog_id) REFERENCES Dogs(dog_id),
 )`);
 
 
