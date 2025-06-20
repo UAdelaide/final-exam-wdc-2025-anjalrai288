@@ -78,8 +78,8 @@ let db;
                 ((SELECT dog_id FROM Dogs WHERE name = 'Max'), '2025-06-10 08:00:00', 30, 'Parklands', 'open'),
                 ((SELECT dog_id FROM Dogs WHERE name = 'Bella'), '2025-06-10 09:30:00', 45, 'Beachside Ave', 'accepted'),
                 ((SELECT dog_id FROM Dogs WHERE name = 'Rocky'), '2025-06-11 10:00:00', 60, 'City Park', 'open'),
-                ((SELECT dog_id FROM Dogs WHERE name = 'Daisy'), '2025-06-12 07:45:00', 25, 'Riverfront Trail', 'open'),
-                ((SELECT dog_id FROM Dogs WHERE name = 'Gus' AND owner_id = (SELECT user_id FROM Users WHERE username = 'carol123')), '2025-06-13 18:00:00', 40, 'Hillside Path', 'cancelled');
+                ((SELECT dog_id FROM Dogs WHERE name = 'Ram'), '2025-06-12 07:45:00', 25, 'Riverfront Trail', 'open'),
+                ((SELECT dog_id FROM Dogs WHERE name = 'Rai'), '2025-06-13 18:00:00', 40, 'Hillside Path', 'cancelled');
             `);
             console.log('WalkRequests inserted.');
 
