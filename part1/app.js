@@ -43,6 +43,11 @@ let db;
       try{
         await db.execute('SET FOREIGN_KEY_CHECK_CHECKS = 0;');
         await db.execute('TRUNCATE TABLE WalkRatings;');
+        await db.execute('TRUNCATE TABLE WalkRatings;');
+        await db.execute('TRUNCATE TABLE WalkRatings;');
+        await db.execute('TRUNCATE TABLE WalkRatings;');
+        await db.execute('TRUNCATE TABLE WalkRatings;');
+        await db.execute('TRUNCATE TABLE WalkRatings;');
       }
 
 
