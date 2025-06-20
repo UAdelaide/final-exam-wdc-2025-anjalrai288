@@ -30,28 +30,22 @@ let db;
    db = await mysql.createConnection({
      host: 'localhost',
      user: 'root',
-     password: '', 
-     database: 'DogWalkService' // Connect to our specific database
+     password: '',
+     database: 'DogWalkService'
    });
 
 
    console.log('Connected to DogWalkService database.');
 
-
-   // --- Insert initial records for DogWalkService ---
-   // This logic ensures data is present for testing the API endpoints.
-   // Wrap insertions in a transaction for atomicity.
    await db.beginTransaction();
    try {
-       // Optional: Clear existing data for a fresh start each time the app runs
-       // Order of deletion matters due to foreign key constraints
-       await db.execute('SET FOREIGN_KEY_CHECKS = 0;'); // Temporarily disable FK checks for deletion
+       await db.execute('SET FOREIGN_KEY_CHECKS = 0;');
        await db.execute('TRUNCATE TABLE WalkRatings;');
        await db.execute('TRUNCATE TABLE WalkApplications;');
        await db.execute('TRUNCATE TABLE WalkRequests;');
        await db.execute('TRUNCATE TABLE Dogs;');
        await db.execute('TRUNCATE TABLE Users;');
-       await db.execute('SET FOREIGN_KEY_CHECKS = 1;'); // Re-enable FK checks
+       await db.execute('SET FOREIGN_KEY_CHECKS = 1;');
        console.log('Existing DogWalkService data cleared (if any).');
 
 
