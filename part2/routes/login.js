@@ -15,7 +15,7 @@ router.post('/login', async (req , res) =>{
             return res.json({success: false, message: 'Incorrect password' });
         }
 
-        req.session
+        req.session.userId = user.user
 
 
 
