@@ -45,8 +45,8 @@ let db;
         await db.execute('TRUNCATE TABLE WalkRatings;');
         await db.execute('TRUNCATE TABLE WalkRequests;');
         await db.execute('TRUNCATE TABLE Dogs;');
-        await db.execute('TRUNCATE TABLE WalkRatings;');
-        await db.execute('TRUNCATE TABLE WalkRatings;');
+        await db.execute('TRUNCATE TABLE Users;');
+        await db.execute(''SET FOREIGN_KEY_CHECK_CHECKS = 0;');
         await db.execute('TRUNCATE TABLE WalkRatings;');
       }
 
