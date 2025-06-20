@@ -65,12 +65,12 @@ VALUES
        // 2. Insert Dogs
        await db.execute(`
            INSERT INTO Dogs (owner_id, name, size)
-           VALUES
-           ((SELECT user_id FROM Users WHERE username = 'alice123' AND role = 'owner'), 'Max', 'medium'),
-           ((SELECT user_id FROM Users WHERE username = 'carol123' AND role = 'owner'), 'Bella', 'small'),
-           ((SELECT user_id FROM Users WHERE username = 'davidowner' AND role = 'owner'), 'Rocky', 'large'),
-           ((SELECT user_id FROM Users WHERE username = 'alice123' AND role = 'owner'), 'Daisy', 'small'),
-           ((SELECT user_id FROM Users WHERE username = 'carol123' AND role = 'owner'), 'Gus', 'medium');
+VALUES
+((SELECT user_id FROM Users WHERE username = 'alice123'), 'Max', 'medium'),
+((SELECT user_id FROM Users WHERE username = 'carol123'), 'Bella', 'small'),
+((SELECT user_id FROM Users WHERE username = 'carol123'), 'Cha', 'large'),
+((SELECT user_id FROM Users WHERE username = 'alice123'), 'Ram', 'small'),
+((SELECT user_id FROM Users WHERE username = 'carol123'), 'Rai', 'medium');
        `);
        console.log('Dogs inserted.');
 
