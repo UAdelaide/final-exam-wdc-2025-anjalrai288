@@ -50,7 +50,8 @@ let db;
         await db.execute('TRUNCATE TABLE WalkRatings;');
         console.log('Existing DogWalkService data cleared (if any).');
 
-        await.
+        await db.execute('
+            ')
       }
 
 
