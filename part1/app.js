@@ -70,11 +70,12 @@ let db;
         `);
 
         await db.execute(`
-            INSERT INTO Users (username, email, password_hash, role) VALUES
-            ('alice123', 'alice@example.com', 'hashed123', 'owner'),
-            ('carol123', 'carol@example.com', 'hashed789', 'owner'),
-            ('bobwalker', 'bob@example.com', 'hashed456', 'walker'),
-            ('newwalker', 'newwalker@example.com', 'hashed000', 'walker')
+            INSERT INTO Users (username, email, password_hash, role) VALUES 
+('alice123', 'alice@example.com', 'hashed123', 'owner'),
+('bobwalker', 'bob@example.com', 'hashed456', 'walker'),
+('carol123', 'carol@example.com', 'hashed789', 'owner'),
+('ghjb456', 'ghjb@example.com', 'hashed109', 'walker'),
+('dcs321', 'dcs@example.com', 'hashed202', 'owner');
         `);
 
         // Insert dogs (only Max and Bella for sample output)
