@@ -130,17 +130,10 @@ app.get('/api/walkers/summary', async (req, res) => {
             LEFT JOIN WalkRequests wr ON wa.request_id = wr.request_id AND wr.status = 'completed'
             LEFT JOIN WalkRatings wrat ON wr.request_id = wrat.request_id AND u.user_id = wrat.walker_id
             WHERE u.role = 'walker'
-            GROUP BY
-                u.user_id, u.username
-            ORDER BY
-                u.username;
+            GROUP BY u.user_id, u.username
+            ORDER BY u.username;
         `);
-
-        // Format average_rating to one decimal place as per sample if it's not null.
-        // Also handle the case where total_ratings is 0, returning null for average_rating.
         const formattedRows = rows.map(row => {
-            // Use parseFloat directly on the database result. This is the most robust way to ensure a number.
-            // It will convert numeric strings (like '4.5') to numbers, and non-numeric to NaN.
             const averageRatingValue = parseFloat(row.average_rating);
 
             // Determine the final average_rating based on total_ratings and validity
