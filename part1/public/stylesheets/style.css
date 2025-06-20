@@ -134,3 +134,10 @@ h1 {
   }
 }
 
+p {
+  font-size: 15px;
+  color: yellow;
+  animation: flicker 2s infinite;
+  margin: 5px 0;
+}
+
