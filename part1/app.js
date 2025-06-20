@@ -274,6 +274,6 @@ app.get('/api/walkers/summary', async (req, res) => {
     }
 });
 
-app.use(express.static(path.join(__dirname, 'public'))); // Keep static file serving
+app.use(express.static(path.join(__dirname, 'public'))); 
 
-module.exports = app; // Export the app for use by bin/www or direct server start
+module.exports = app;
