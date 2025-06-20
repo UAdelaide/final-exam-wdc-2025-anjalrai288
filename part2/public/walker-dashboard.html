@@ -86,7 +86,7 @@
       credentials: 'include'  // 👈 this is required to send session cookie
     });
             if(!res.ok) throw new Error('Failed to fetch current user');
-            currentUser.value = await.res.json();
+            currentUser.value = await res.json();
           } catch (err) {
             error.value = 'Unable to get user info';
           }
