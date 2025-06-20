@@ -92,10 +92,8 @@ app.get('/api/dogs', async (req, res) => {
     try {
         const [rows] = await db.execute(`
             SELECT
-                d.name AS dog_name,
-                d.size, u.username AS owner_username
-            FROM
-                Dogs d
+                d.name AS dog_name, d.size, u.username AS owner_username
+            FROM Dogs d
             JOIN
                 Users u ON d.owner_id = u.user_id
             WHERE u.role = 'owner'; -- Ensure only owners are linked
