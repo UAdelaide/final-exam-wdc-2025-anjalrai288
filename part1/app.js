@@ -70,7 +70,7 @@ let db;
            ((SELECT user_id FROM Users WHERE username = 'alice123' AND role = 'owner'), 'Daisy', 'small'),
            ((SELECT user_id FROM Users WHERE username = 'carol123' AND role = 'owner'), 'Gus', 'medium');
           `);
-       console.log('Dogs inserted.');
+            console.log('Dogs inserted.');
 
         }
 
