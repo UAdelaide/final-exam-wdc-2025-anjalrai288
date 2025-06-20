@@ -67,9 +67,9 @@
               headers: {'Content-Type': 'application/json'}
             });
 
-            const data = awaitres.json();
-            if (data.sucess){
-              window.location.herf = '/index.html';
+            const data = await res.json();
+            if (data.success){
+              window.location.href = '/index.html';
             }else{
               alert('Logout failed');
             }
