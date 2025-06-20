@@ -114,12 +114,69 @@ app.get('/api/walkrequests/open', async (req, res) => {
             JOIN Users u ON d.owner_id = u.user_id
             WHERE wr.status = 'open';
         `);
-        res.json(rows); 
+        res.json(rows);
     } catch (error) {
         console.error('Error fetching open walk requests:', error);
         res.status(500).json({ error: 'Internal server error', message: error.message });
     }
 });
+
+app.get('/api/walkers/summary', async (req, res) => {
+    try {
+        if (!db) { // Check if db connection is established
+            return res.status(503).json({ error: 'Database not initialized.' });
+        }
+        const [rows] = await db.execute(`
+            SELECT
+                u.username AS walker_username,
+                COUNT(DISTINCT wr.request_id) AS completed_walks,
+                COALESCE(AVG(wrat.rating), 0.0) AS average_rating, -- Change NULL to 0.0 for AVG to ensure a float type
+                COUNT(wrat.rating_id) AS total_ratings -- Count of actual ratings received
+            FROM
+                Users u
+            LEFT JOIN
+                WalkApplications wa ON u.user_id = wa.walker_id AND wa.status = 'accepted'
+            LEFT JOIN
+                WalkRequests wr ON wa.request_id = wr.request_id AND wr.status = 'completed'
+            LEFT JOIN
+                WalkRatings wrat ON wr.request_id = wrat.request_id AND u.user_id = wrat.walker_id
+            WHERE
+                u.role = 'walker'
+            GROUP BY
+                u.user_id, u.username
+            ORDER BY
+                u.username;
+        `);
+
+        // Format average_rating to one decimal place as per sample if it's not null.
+        // Also handle the case where total_ratings is 0, returning null for average_rating.
+        const formattedRows = rows.map(row => {
+            // Use parseFloat directly on the database result. This is the most robust way to ensure a number.
+            // It will convert numeric strings (like '4.5') to numbers, and non-numeric to NaN.
+            const averageRatingValue = parseFloat(row.average_rating);
+
+            // Determine the final average_rating based on total_ratings and validity
+            let finalAverageRating = null;
+            if (row.total_ratings > 0 && !isNaN(averageRatingValue)) {
+                // If there are ratings and the value is a valid number, format it.
+                finalAverageRating = parseFloat(averageRatingValue.toFixed(1));
+            }
+
+            return {
+                walker_username: row.walker_username,
+                total_ratings: row.total_ratings,
+                average_rating: finalAverageRating,
+                completed_walks: row.completed_walks
+            };
+        });
+
+        res.json(formattedRows); // Return as JSON
+    } catch (error) {
+        console.error('Error fetching walkers summary:', error);
+        res.status(500).json({ error: 'Internal server error', message: error.message });
+    }
+});
+
 
 
 
