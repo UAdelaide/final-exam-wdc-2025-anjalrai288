@@ -6,4 +6,7 @@ createApp({
       dogImage: ''
     };
   },
-  
+  methods: {
+    async reloadDog() {
+      try {
+        
