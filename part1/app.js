@@ -39,7 +39,7 @@ let db;
 
         console.log('Connected to DogWalkService.');
 
-        try {
+
             await db.execute(`
                 INSERT INTO Users (username, email, password_hash, role)
                 VALUES
@@ -73,10 +73,10 @@ let db;
             `);
             console.log('WalkRequests inserted.');
         }
-    } catch (err) {
+    catch (err) {
         console.error('Error setting up database. Ensure Mysql is running: service mysql start', err);
     }
-})();
+)();
 
 app.get('/api/dogs', async (req, res) => {
     try {
