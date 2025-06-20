@@ -6,7 +6,7 @@ const app = express();
 //MY PART
 const session= require('express-session');
 app.use(session({
-    se
+    secret: process.env.SESSION
 })
 
 // Middleware
