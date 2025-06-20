@@ -84,12 +84,9 @@
             if(!res.ok) throw new Error('Failed to fetch current user');
             currentUser.value = awaitres.json();
           } catch (err) {
-            error.value = 'Unable to get '
+            error.value = 'Unable to get user info';
           }
-
           }
-
-        }
 
         async function applyToWalk(requestId) {
           try {
