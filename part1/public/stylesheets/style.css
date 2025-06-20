@@ -7,3 +7,6 @@ body {
   user-select: none;
 }
 
+@keyframes bgShift {
+  0% { background-position: 0% 50%; }
+  
