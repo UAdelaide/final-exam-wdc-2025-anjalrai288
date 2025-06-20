@@ -90,9 +90,6 @@ let db;
 
 app.get('/api/dogs', async (req, res) => {
     try {
-        if (!db) {
-            return res.status(503).json({ error: 'Database not initialized.' });
-        }
         const [rows] = await db.execute(`
             SELECT
                 d.name AS dog_name,
