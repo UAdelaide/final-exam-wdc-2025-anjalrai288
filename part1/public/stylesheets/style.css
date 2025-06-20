@@ -155,4 +155,6 @@ button {
   color: black;
   font-weight: bold;
   cursor: pointer;
-  
+  animation: rotateButton 5s linear infinite;
+  user-select: none;
+}
