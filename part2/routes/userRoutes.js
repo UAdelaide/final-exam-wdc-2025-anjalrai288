@@ -100,7 +100,11 @@ router.get('/api/my-dogs', async (req, res) => {
   }
 });
 
-router.get('/api/dogs', async(req, res) =>)
+router.get('/api/dogs', async(req, res) =>{
+  try{
+    
+  }
+})
 
 
 
