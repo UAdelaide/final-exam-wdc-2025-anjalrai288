@@ -179,15 +179,9 @@ app.get('/api/walkers/summary', async (req, res) => {
        `);
 
        const formattedRows = rows.map(row => {
-           // Use parseFloat directly on the database result. This is the most robust way to ensure a number.
-           // It will convert numeric strings (like '4.5') to numbers, and non-numeric to NaN.
            const averageRatingValue = parseFloat(row.average_rating);
-
-
-           // Determine the final average_rating based on total_ratings and validity
            let finalAverageRating = null;
            if (row.total_ratings > 0 && !isNaN(averageRatingValue)) {
-               // If there are ratings and the value is a valid number, format it.
                finalAverageRating = parseFloat(averageRatingValue.toFixed(1));
            }
 
@@ -201,7 +195,7 @@ app.get('/api/walkers/summary', async (req, res) => {
        });
 
 
-       res.json(formattedRows); // Return as JSON
+       res.json(formattedRows);
    } catch (error) {
        console.error('Error fetching walkers summary:', error);
        res.status(500).json({ error: 'Internal server error', message: error.message });
@@ -209,10 +203,10 @@ app.get('/api/walkers/summary', async (req, res) => {
 });
 
 
-app.use(express.static(path.join(__dirname, 'public'))); // Keep static file serving
+app.use(express.static(path.join(__dirname, 'public')));
 
 
-module.exports = app; // Export the app for use by bin/www or direct server start
+module.exports = app;
 
 
 
