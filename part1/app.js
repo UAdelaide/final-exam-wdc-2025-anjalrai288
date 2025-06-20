@@ -95,21 +95,13 @@ VALUES
 
  } catch (err) {
    console.error('Error setting up database. Ensure MySQL is running and password is correct:', err);
-   process.exit(1); // Exit if DB connection fails critical startup
+   process.exit(1);
  }
 })();
 
-
-
-
-// Define API Routes
-
-
-// /api/dogs
-// Returns a list of all dogs with their size and owner's username.
 app.get('/api/dogs', async (req, res) => {
    try {
-       if (!db) { // Check if db connection is established
+       if (!db) {
            return res.status(503).json({ error: 'Database not initialized.' });
        }
        const [rows] = await db.execute(`
@@ -123,16 +115,13 @@ app.get('/api/dogs', async (req, res) => {
                Users u ON d.owner_id = u.user_id
            WHERE u.role = 'owner'; -- Ensure only owners are linked
        `);
-       res.json(rows); // Return as JSON
+       res.json(rows);
    } catch (error) {
        console.error('Error fetching dogs:', error);
        res.status(500).json({ error: 'Internal server error', message: error.message });
    }
 });
 
-
-// /api/walkrequests/open
-// Return all open walk requests, including the dog name, requested time, location, and owner's username.
 app.get('/api/walkrequests/open', async (req, res) => {
    try {
        if (!db) { // Check if db connection is established
