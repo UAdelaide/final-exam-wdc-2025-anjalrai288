@@ -39,7 +39,7 @@ let db;
 
         console.log('Connected to DogWalkService.');
 
-        await
+        await db.
 
 
             await db.execute(`
