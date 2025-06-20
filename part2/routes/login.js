@@ -20,7 +20,9 @@ router.post('/login', async (req , res) =>{
         req.session.role=user.role;
 
         if(user.role === 'owner'){
-            return res.json({success: true, })
+            return res.json({success: true, redirect: ' '});
+        }
+
         }
 
 
