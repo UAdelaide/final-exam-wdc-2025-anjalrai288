@@ -7,7 +7,7 @@ router.post('/login', async (req , res) =>{
 
     db.query('SELECT * FROM USERS WHERE username = ?', [username],(err, result) => {
         if (err) return res.status(500).json({success: false,message: 'DB error'});
-        if (result.length === 0)
+        if (result.length === 0) return res.json(success: false, message: )
 
 
 
