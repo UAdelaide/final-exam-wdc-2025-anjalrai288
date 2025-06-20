@@ -100,17 +100,17 @@ router.get('/api/my-dogs', async (req, res) => {
   }
 });
 
-router.get('/api/dogs', async(req, res) =>{
+router.get('/api/dogs', async (req, res) => {
   try {
     const [rows] = await db.query(`
-      SELECT Dogs.dog_id, Dogs.name, Dogs.size, Users.username AS owner_name
+      SELECT dog_id, name, size, owner_id
       FROM Dogs
-      JOIN Users ON Dogs.owner_id = Users.user_id`);
-      res.json(rows);
-    } catch (err) {
-      res.status(500).json({error: 'Failed to fetch dogs'});
-    }
-  });
+    `);
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch dogs' });
+  }
+});
 
 
 
