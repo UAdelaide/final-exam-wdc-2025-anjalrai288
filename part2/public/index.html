@@ -35,50 +35,7 @@
     createApp({
       data() {
         return {
-          message: 'Welcome to the Dog Walking Service!',
-          username: '',
-          password: '',
-          loginError: ''
-        };
-      },
-      methods: {
-        async handleLogin() {
-          this.loginError = '';
-
-          try {
-            const response = await fetch('/api/login', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                username: this.username,
-                password: this.password
-              })
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-              console.log('Login successful! Redirecting...', data.role);
-              if (data.role === 'owner') {
-                window.location.href = '/owner-dashboard';
-              } else if (data.role === 'walker') {
-                window.location.href = '/walker-dashboard';
-              } else {
-                this.loginError = 'Login successful, but an unexpected role was returned.';
-              }
-            } else {
-              this.loginError = data.message || 'Login failed. Please check your credentials.';
-              console.error('Login failed:', data.message);
-            }
-          } catch (error) {
-            this.loginError = 'A network error occurred. Please try again later.';
-            console.error('Network error during login:', error);
-          }
-        }
-      }
-    }).mount('#app');
+          
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
