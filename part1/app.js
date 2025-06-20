@@ -52,17 +52,17 @@ let db;
        // 1. Insert Users
        await db.execute(`
            INSERT INTO Users (username, email, password_hash, role)
-           VALUES
-           ('alice123', 'alice@example.com', 'hashed123', 'owner'),
-           ('bobwalker', 'bob@example.com', 'hashed456', 'walker'),
-           ('carol123', 'carol@example.com', 'hashed789', 'owner'),
-           ('davidowner', 'david@example.com', 'securepass1', 'owner'),
-           ('evewalker', 'eve@example.com', 'securepass2', 'walker');
+VALUES
+('alice123', 'alice@example.com', 'hashed123', 'owner'),
+('bobwalker', 'bob@example.com', 'hashed456', 'walker'),
+('carol123', 'carol@example.com', 'hashed789', 'owner'),
+('ghjb456', 'ghjb@example.com', 'hashed109', 'walker'),
+('dcs321', 'dcs@example.com', 'hashed202', 'owner');
        `);
        console.log('Users inserted.');
 
 
-       // 2. Insert Dogs 
+       // 2. Insert Dogs
        await db.execute(`
            INSERT INTO Dogs (owner_id, name, size)
            VALUES
