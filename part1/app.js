@@ -95,7 +95,6 @@ let db;
             ((SELECT dog_id FROM Dogs WHERE name = 'Ram'), '2025-06-12 07:45:00', 25, 'Riverfront Trail', 'open'),
             ((SELECT dog_id FROM Dogs WHERE name = 'Rai'), '2025-06-13 18:00:00', 40, 'Hillside Path', 'cancelled');
         `);
-
         console.log('Sample data inserted.');
 
     } catch (err) {
