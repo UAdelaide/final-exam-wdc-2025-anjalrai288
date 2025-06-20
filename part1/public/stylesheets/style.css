@@ -158,3 +158,9 @@ button {
   animation: rotateButton 5s linear infinite;
   user-select: none;
 }
+
+@keyframes rotateButton {
+  0% { transform: rotate(0deg) skew(0deg, 0deg); }
+  25% { transform: rotate(180deg) skew(15deg, 0deg); }
+  50% { transform: rotate(-15deg) skew(-15deg, 15deg); }
+   75% { transform: rotate(50deg) skew(0deg, -40deg); }
