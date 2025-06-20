@@ -124,12 +124,9 @@ app.get('/api/walkrequests/open', async (req, res) => {
 app.get('/api/walkers/summary', async (req, res) => {
     try {
         const [rows] = await db.execute(`
-            SELECT u.username AS walker_username, COUNT(DISTINCT wr.request_id) AS completed_walks, COALESCE(AVG(wrat.rating), 0.0) AS average_rating, -- Change NULL to 0.0 for AVG to ensure a float type
-                COUNT(wrat.rating_id) AS total_ratings -- Count of actual ratings received
-            FROM
-                Users u
-            LEFT JOIN
-                WalkApplications wa ON u.user_id = wa.walker_id AND wa.status = 'accepted'
+            SELECT u.username AS walker_username, COUNT(DISTINCT wr.request_id) AS completed_walks, COALESCE(AVG(wrat.rating), 0.0) AS average_rating, -- Change NULL to 0.0 for AVG to ensure a float type COUNT(wrat.rating_id) AS total_ratings -- Count of actual ratings received
+            FROM Users u
+            LEFT JOIN WalkApplications wa ON u.user_id = wa.walker_id AND wa.status = 'accepted'
             LEFT JOIN
                 WalkRequests wr ON wa.request_id = wr.request_id AND wr.status = 'completed'
             LEFT JOIN
