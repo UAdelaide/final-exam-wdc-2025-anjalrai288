@@ -119,7 +119,6 @@ app.get('/api/walkrequests/open', async (req, res) => {
     }
 });
 
-// Get walker summary: username, completed walks, average rating, total ratings
 app.get('/api/walkers/summary', async (req, res) => {
     try {
         const [rows] = await db.execute(`
