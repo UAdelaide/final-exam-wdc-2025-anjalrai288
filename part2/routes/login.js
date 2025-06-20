@@ -23,10 +23,5 @@ router.post('/login', async (req , res) =>{
             return res.json({success: true, redirect: ' '});
         }else{return res.json({success: true, redirect: ' '});}
 
-        }
-
-
-
-
-    )
-})
+    });
+});
