@@ -90,7 +90,10 @@
           try {
             const res = await fetch('/api/dogs');
             const dogList = await res.json();
-            
+            for (let dog of dogList) {
+              try {
+                const imgRes = await fetch('https://dog.ceo/api/breeds/image/random');
+                
 
       }
     }).mount('#app');
