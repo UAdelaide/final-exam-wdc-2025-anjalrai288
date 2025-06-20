@@ -65,3 +65,72 @@ h1 {
   user-select: none;
 }
 
+@keyframes crazyGlow {
+  0% {
+    text-shadow:
+      0 0 20px #ff00ff,
+      0 0 30px #ff00ff,
+      0 0 40px #ff00ff,
+      0 0 50px #ff00ff,
+      0 0 60px #ff00ff,
+      0 0 70px #ff00ff,
+      0 0 80px #ff00ff;
+    color: #ff00ff;
+  }
+
+  20% {
+    text-shadow:
+      0 0 30px #00ffff,
+      0 0 40px #00ffff,
+      0 0 50px #00ffff,
+      0 0 60px #00ffff,
+      0 0 70px #00ffff,
+      0 0 80px #00ffff,
+      0 0 90px #00ffff;
+    color: #00ffff;
+  }
+  40% {
+    text-shadow:
+      0 0 40px #ff4500,
+      0 0 50px #ff4500,
+      0 0 60px #ff4500,
+      0 0 70px #ff4500,
+      0 0 80px #ff4500,
+      0 0 90px #ff4500,
+      0 0 100px #ff4500;
+    color: #ff4500;
+  }
+  60% {
+    text-shadow:
+      0 0 50px #7fff00,
+      0 0 60px #7fff00,
+      0 0 70px #7fff00,
+      0 0 80px #7fff00,
+      0 0 90px #7fff00,
+      0 0 100px #7fff00,
+      0 0 110px #7fff00;
+    color: #7fff00;
+  }
+  80% {
+    text-shadow:
+      0 0 60px #ff1493,
+      0 0 70px #ff1493,
+      0 0 80px #ff1493,
+      0 0 90px #ff1493,
+      0 0 100px #ff1493,
+      0 0 110px #ff1493,
+      0 0 120px #ff1493;
+    color: #ff1493;
+  }
+  100% {
+    text-shadow:
+      0 0 70px #ff69b4,
+      0 0 80px #ff69b4,
+      0 0 90px #ff69b4,
+      0 0 100px #ff69b4,
+      0 0 110px #ff69b4,
+      0 0 120px #ff69b4,
+      0 0 130px #ff69b4;
+    color: #ff69b4;
+  }
+}
