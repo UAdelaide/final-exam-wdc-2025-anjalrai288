@@ -84,7 +84,13 @@
           } catch (err) {
             this.loginError = 'Login failed. Please try again.';
           }
-        }
+        },
+
+        async loadDogs() {
+          try {
+            const res = await fetch('/api/dogs');
+            const dogList = await res.json();
+
       }
     }).mount('#app');
   </script>
