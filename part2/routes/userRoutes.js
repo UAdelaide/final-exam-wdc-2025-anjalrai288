@@ -35,7 +35,7 @@ router.get('/me', (req, res) => {
   res.json(req.session.user);
 });
 
-// POST login (dummy version)
+// POST login (changed version)
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
@@ -51,7 +51,6 @@ router.post('/login', async (req, res) => {
 
     const user = rows[0];
 
-    // ⚠️ In real apps, use bcrypt.compare() here
     if (user.password_hash !== password) {
       return res.status(401).json({ success: false, message: 'Incorrect password' });
     }
