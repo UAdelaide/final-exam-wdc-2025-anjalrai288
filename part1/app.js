@@ -96,65 +96,6 @@ let db;
             ((SELECT dog_id FROM Dogs WHERE name = 'Rai'), '2025-06-13 18:00:00', 40, 'Hillside Path', 'cancelled');
         `);
 
-        // Insert walk applications (bobwalker accepted Bella's walk)
-        await db.execute(`
-            INSERT INTO WalkApplications (request_id, walker_id, status)
-            VALUES
-            (
-                (SELECT request_id FROM WalkRequests WHERE dog_id = (SELECT dog_id FROM Dogs WHERE name = 'Bella')),
-                (SELECT user_id FROM Users WHERE username = 'bobwalker'),
-                'accepted'
-            )
-        `);
-
-        // Insert walk ratings (bobwalker rated for Bella's walk)
-        await db.execute(`
-            INSERT INTO WalkRatings (request_id, walker_id, owner_id, rating, comments)
-            VALUES
-            (
-                (SELECT request_id FROM WalkRequests WHERE dog_id = (SELECT dog_id FROM Dogs WHERE name = 'Bella')),
-                (SELECT user_id FROM Users WHERE username = 'bobwalker'),
-                (SELECT user_id FROM Users WHERE username = 'carol123'),
-                5,
-                'Bobwalker was excellent with Bella!'
-            )
-        `);
-
-        // Insert another completed walk and rating to get average 4.5 for bobwalker with 2 completed walks
-        await db.execute(`
-            INSERT INTO WalkRequests (dog_id, requested_time, duration_minutes, location, status)
-            VALUES
-            (
-                (SELECT dog_id FROM Dogs WHERE name = 'Max'),
-                '2025-06-11 10:00:00',
-                25,
-                'City Park',
-                'completed'
-            )
-        `);
-
-        await db.execute(`
-            INSERT INTO WalkApplications (request_id, walker_id, status)
-            VALUES
-            (
-                (SELECT request_id FROM WalkRequests WHERE dog_id = (SELECT dog_id FROM Dogs WHERE name = 'Max') AND status = 'completed' ORDER BY request_id DESC LIMIT 1),
-                (SELECT user_id FROM Users WHERE username = 'bobwalker'),
-                'accepted'
-            )
-        `);
-
-        await db.execute(`
-            INSERT INTO WalkRatings (request_id, walker_id, owner_id, rating, comments)
-            VALUES
-            (
-                (SELECT request_id FROM WalkRequests WHERE dog_id = (SELECT dog_id FROM Dogs WHERE name = 'Max') AND status = 'completed' ORDER BY request_id DESC LIMIT 1),
-                (SELECT user_id FROM Users WHERE username = 'bobwalker'),
-                (SELECT user_id FROM Users WHERE username = 'alice123'),
-                4,
-                'Good walk with Max.'
-            )
-        `);
-
         console.log('Sample data inserted.');
 
     } catch (err) {
