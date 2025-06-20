@@ -84,7 +84,7 @@ let db;
             console.log('WalkRequests inserted.');
         }
     }catch (err) {
-        console.error)
+        console.error('Error setting up database. R'))
     }
 
 
