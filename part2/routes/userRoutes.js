@@ -39,7 +39,7 @@ router.get('/me', (req, res) => {
 router.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
-  db.query('SELECT * FROM USERS WHERE username = ?', [username], (err, results) => {
+  db.query('SELECT * FROM Users WHERE username = ?', [username], (err, results) => {
     if (err) return res.status(500).json({ success: false, message: 'DataBase error' });
     if (results.length === 0) return res.json({ success: false, message: 'User not found' });
 
