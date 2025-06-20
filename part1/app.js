@@ -48,6 +48,9 @@ let db;
         await db.execute('TRUNCATE TABLE Users;');
         await db.execute('SET FOREIGN_KEY_CHECK_CHECKS = 1;');
         await db.execute('TRUNCATE TABLE WalkRatings;');
+        console.log('Existing DogWalkService data cleared (if any).');
+
+        await.
       }
 
 
