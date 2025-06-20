@@ -58,7 +58,18 @@ let db;
             FOREIGN KEY (owner_id) REFERENCES Users(user_id)
 )`);
 
-        
+await db.execute(`
+    CREATE TABLE WalkRequests (
+    request_id INT AUTO_INCREMENT PRIMARY KEY,
+    dog_id INT NOT NULL,
+    requested_time DATETIME NOT NULL,
+    duration_minutes INT NOT NULL,
+    location VARCHAR(255) NOT NULL,
+    status ENUM('open', 'accepted', 'completed', 'cancelled') DEFAULT 'open',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (dog_id) REFERENCES Dogs(dog_id)
+);
+)`);
 
 
             await db.execute(`
