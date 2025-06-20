@@ -41,15 +41,7 @@ let db;
 
         await db.beginTransaction();
         try {
-            await db.execute('SET FOREIGN_KEY_CHECK_CHECKS = 0;');
-            await db.execute('TRUNCATE TABLE WalkRatings;');
-            await db.execute('TRUNCATE TABLE WalkRequests;');
-            await db.execute('TRUNCATE TABLE Dogs;');
-            await db.execute('TRUNCATE TABLE Users;');
-            await db.execute('SET FOREIGN_KEY_CHECK_CHECKS = 1;');
-            await db.execute('TRUNCATE TABLE WalkRatings;');
-            console.log('Existing DogWalkService data cleared (if any).');
-
+            
             await db.execute(`
                 INSERT INTO Users (username, email, password_hash, role)
                 VALUES
@@ -148,7 +140,7 @@ app.get('/api/walkers/summary', async (req, res) => {
             };
         });
 
-        res.json(formattedRows); 
+        res.json(formattedRows);
     } catch (error) {
         console.error('Error fetching walkers summary:', error);
         res.status(500).json({ error: 'Internal server error', message: error.message });
