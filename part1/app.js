@@ -67,8 +67,8 @@ let db;
                 ((SELECT user_id FROM Users WHERE username = 'alice123' AND role = 'owner'), 'Max', 'medium'),
                 ((SELECT user_id FROM Users WHERE username = 'carol123' AND role = 'owner'), 'Bella', 'small'),
                 ((SELECT user_id FROM Users WHERE username = 'carol123' AND role = 'owner'), 'Cha', 'large'),
-                ((SELECT user_id FROM Users WHERE username = 'alice123' AND role = 'owner'), 'Daisy', 'small'),
-                ((SELECT user_id FROM Users WHERE username = 'carol123' AND role = 'owner'), 'Gus', 'medium');
+                ((SELECT user_id FROM Users WHERE username = 'alice123' AND role = 'owner'), 'Ram', 'small'),
+                ((SELECT user_id FROM Users WHERE username = 'carol123' AND role = 'owner'), 'Rai', 'medium');
             `);
             console.log('Dogs inserted.');
 
