@@ -22,3 +22,11 @@ img {
   margin-top: 20px;
   transform-origin: center bottom;
 }
+
+@keyframes jitterGlow {
+  0% {
+    box-shadow: 0 0 10px 4px magenta;
+    filter: brightness(0.8) hue-rotate(0deg);
+    transform: translate(0, 0);
+  }
+  
