@@ -50,15 +50,17 @@ let db;
             await db.execute('TRUNCATE TABLE WalkRatings;');
             console.log('Existing DogWalkService data cleared (if any).');
 
-            await db.execute('
-           INSERT INTO Users(username, email, password_hash, role)
-           VALUES
+            await db.execute(`
+                INSERT INTO Users (username, email, password_hash, role)
+                VALUES
                 ('alice123', 'alice@example.com', 'hashed123', 'owner'),
                 ('bobwalker', 'bob@example.com', 'hashed456', 'walker'),
                 ('carol123', 'carol@example.com', 'hashed789', 'owner'),
                 ('davidowner', 'david@example.com', 'securepass1', 'owner'),
-                ('evewalker', 'eve@example.com', 'securepass2', 'walker'); ')
+                ('evewalker', 'eve@example.com', 'securepass2', 'walker');
+            `);
             console.log('Users inserted.');
+
         }
 
 
