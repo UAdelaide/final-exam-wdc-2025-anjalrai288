@@ -146,3 +146,10 @@ p {
   50% { opacity: 0.4; }
 }
 
+button {
+  margin-top: 15px;
+  padding: 10px 30px;
+  font-size: 18px;
+  background: linear-gradient(90deg, rgba(255, 0, 0, 0.036), purple, yellow, green);
+  border: 5px dotted cyan;
+  
