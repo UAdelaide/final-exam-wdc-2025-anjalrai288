@@ -87,88 +87,14 @@ VALUES
        `);
        console.log('WalkRequests inserted.');
 
-
-       // 4. Insert WalkApplications
-       await db.execute(`
-           INSERT INTO WalkApplications (request_id, walker_id, status)
-           VALUES
-           ((SELECT request_id FROM WalkRequests WHERE dog_id = (SELECT dog_id FROM Dogs WHERE name = 'Max') AND status = 'open' LIMIT 1), (SELECT user_id FROM Users WHERE username = 'bobwalker'), 'pending'),
-           ((SELECT request_id FROM WalkRequests WHERE dog_id = (SELECT dog_id FROM Dogs WHERE name = 'Rocky') AND status = 'open' LIMIT 1), (SELECT user_id FROM Users WHERE username = 'evewalker'), 'pending'),
-           -- Let's assume bobwalker accepts Bella's walk (which was 'accepted' initially) and completes it
-           ((SELECT request_id FROM WalkRequests WHERE dog_id = (SELECT dog_id FROM Dogs WHERE name = 'Bella') AND status = 'accepted' LIMIT 1), (SELECT user_id FROM Users WHERE username = 'bobwalker'), 'accepted');
-       `);
-       console.log('WalkApplications inserted.');
-
-
-       // Update Bella's walk request to 'completed' and then add a rating for it.
-       await db.execute(`
-           UPDATE WalkRequests
-           SET status = 'completed'
-           WHERE dog_id = (SELECT dog_id FROM Dogs WHERE name = 'Bella') AND status = 'accepted'
-           LIMIT 1;
-       `);
-       console.log('Bella\'s walk request updated to completed.');
-
-
-       // 5. Insert WalkRatings (example data for testing /api/walkers/summary later)
-       await db.execute(`
-           INSERT INTO WalkRatings (request_id, walker_id, owner_id, rating, comments)
-           VALUES
-           (
-               (SELECT request_id FROM WalkRequests WHERE dog_id = (SELECT dog_id FROM Dogs WHERE name = 'Bella') AND status = 'completed' LIMIT 1),
-               (SELECT user_id FROM Users WHERE username = 'bobwalker'),
-               (SELECT user_id FROM Users WHERE username = 'carol123'),
-               5,
-               'Bobwalker was excellent with Bella!'
-           );
-       `);
-       console.log('WalkRatings inserted.');
-
-
-       // Add another completed walk and rating for bobwalker to test average_rating
-       await db.execute(`
-           UPDATE WalkRequests
-           SET status = 'completed'
-           WHERE dog_id = (SELECT dog_id FROM Dogs WHERE name = 'Daisy') AND status = 'open'
-           LIMIT 1;
-       `);
-       await db.execute(`
-           INSERT INTO WalkApplications (request_id, walker_id, status)
-           VALUES (
-               (SELECT request_id FROM WalkRequests WHERE dog_id = (SELECT dog_id FROM Dogs WHERE name = 'Daisy') AND status = 'completed' LIMIT 1),
-               (SELECT user_id FROM Users WHERE username = 'bobwalker'),
-               'accepted'
-           );
-       `);
-       await db.execute(`
-           INSERT INTO WalkRatings (request_id, walker_id, owner_id, rating, comments)
-           VALUES
-           (
-               (SELECT request_id FROM WalkRequests WHERE dog_id = (SELECT dog_id FROM Dogs WHERE name = 'Daisy') AND status = 'completed' LIMIT 1),
-               (SELECT user_id FROM Users WHERE username = 'bobwalker'),
-               (SELECT user_id FROM Users WHERE username = 'alice123'),
-               4,
-               'Bobwalker did a good job with Daisy.'
-           );
-       `);
-       console.log('Additional completed walk and rating for Bobwalker inserted.');
-
-
-       await db.commit(); // Commit the transaction
-       console.log('All initial records inserted successfully!');
-
-
    } catch (insertErr) {
        await db.rollback(); // Rollback on any insert error
        console.error('Error inserting initial records, rolling back:', insertErr);
-       // Important: If data insertion fails, the database might be in an inconsistent state.
-       // For a production app, you might want to prevent the server from starting or alert more aggressively.
    }
 
 
  } catch (err) {
    console.error('Error setting up database. Ensure MySQL is running and password is correct:', err);
-   // If database connection or initial setup fails, exit the process or handle appropriately
    process.exit(1); // Exit if DB connection fails critical startup
  }
 })();
