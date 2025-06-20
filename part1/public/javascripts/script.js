@@ -6,5 +6,4 @@ createApp({
       dogImage: ''
     };
   },
-
   
