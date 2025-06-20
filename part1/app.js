@@ -241,7 +241,7 @@ app.get('/api/walkers/summary', async (req, res) => {
             SELECT
                 u.username AS walker_username,
                 COUNT(DISTINCT wr.request_id) AS completed_walks,
-                COALESCE(AVG(wrat.rating), NULL) AS average_rating, -- Use NULL for no ratings as per sample
+                COALESCE(AVG(wrat.rating), 0) AS average_rating, -- Change NULL to 0 for AVG to avoid null.toFixed error
                 COUNT(wrat.rating_id) AS total_ratings -- Count of actual ratings received
             FROM
                 Users u
@@ -259,11 +259,12 @@ app.get('/api/walkers/summary', async (req, res) => {
                 u.username;
         `);
 
-        // Format average_rating to one decimal place as per sample if it's not null
+        // Format average_rating to one decimal place as per sample if it's not null.
+        // Also handle the case where total_ratings is 0, returning null for average_rating.
         const formattedRows = rows.map(row => ({
             walker_username: row.walker_username,
             total_ratings: row.total_ratings,
-            average_rating: row.average_rating !== null ? parseFloat(row.average_rating.toFixed(1)) : null,
+            average_rating: row.total_ratings > 0 ? parseFloat(row.average_rating.toFixed(1)) : null, // Check total_ratings here
             completed_walks: row.completed_walks
         }));
 
