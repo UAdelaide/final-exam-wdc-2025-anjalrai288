@@ -3,7 +3,7 @@ body {
   animation: bgShift 8s linear infinite;
   color: rgb(18, 17, 18);
   font-family: 'Comic Sans MS', cursive, sans-serif;
-  text-align: center;
+  text-align: bottom;
   user-select: none;
 }
 
