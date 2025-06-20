@@ -83,7 +83,7 @@ router.post('/logout',(req,res) => {
   });
 });
 
-router.get()
+router.get('/api/my-dogs',)
 
 
 module.exports = router;
