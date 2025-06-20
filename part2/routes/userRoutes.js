@@ -37,27 +37,22 @@ router.get('/me', (req, res) => {
 
 // POST login (dummy version)
 router.post('/login', async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  db.query('SELECT * FROM Users WHERE username = ?', [username], (err, results) => {
-    if (err) return res.status(500).json({ success: false, message: 'DataBase error' });
-    if (results.length === 0) return res.json({ success: false, message: 'User not found' });
+  try {
+    const [rows] = await db.query(`
+      SELECT user_id, username, role FROM Users
+      WHERE email = ? AND password_hash = ?
+    `, [email, password]);
 
-    const user = results[0];
-    if (password !== user.password_hash) {
-      return res.json({ success: false, message: 'Incorrect password' });
+    if (rows.length === 0) {
+      return res.status(401).json({ error: 'Invalid credentials' });
     }
 
-    req.session.userId = user.user_id;
-    req.session.username = username;
-    req.session.role = user.role;
-
-    if (user.role === 'owner') {
-      return res.json({ success: true, redirect: '/owner-dashboard.html' });
-    } else {
-        return res.json({ success: true, redirect: '/walker-dashboard.html' });
-    }
-  });
+    res.json({ message: 'Login successful', user: rows[0] });
+  } catch (error) {
+    res.status(500).json({ error: 'Login failed' });
+  }
 });
 
 module.exports = router;
