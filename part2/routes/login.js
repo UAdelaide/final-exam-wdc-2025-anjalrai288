@@ -11,7 +11,7 @@ router.post('/login', async (req , res) =>{
     }
 
         const user =results[0];
-        if (password !== user.password)
+        if (password !== user.password_hash)
 
 
 
