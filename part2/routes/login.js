@@ -9,7 +9,9 @@ router.post('/login', async (req , res) =>{
         if (err) return res.status(500).json({success: false,message: 'DB error'});
         if (result.length === 0) return res.json({success: false, message: 'user not found'});
 
-        const user
+        const user =results[0];
+        
+
 
 
 
