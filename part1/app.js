@@ -39,6 +39,8 @@ let db;
 
         console.log('Connected to DogWalkService.');
 
+        await
+
 
             await db.execute(`
                 INSERT INTO Users (username, email, password_hash, role)
