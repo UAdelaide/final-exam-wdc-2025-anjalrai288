@@ -39,7 +39,15 @@ let db;
 
         console.log('Connected to DogWalkService.');
 
-        await db.
+        await db.execute(`
+            CREATE TABLE If NUsers (
+            user_id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    role ENUM('owner', 'walker') NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);`)
 
 
             await db.execute(`
