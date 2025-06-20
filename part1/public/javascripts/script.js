@@ -14,4 +14,11 @@ createApp({
         this.dogImage = data.message;
       } catch {
         this.dogImage = '';
-        
+        alert('No weird dog today!');
+      }
+    }
+  },
+  mounted() {
+    this.reloadDog();
+  }
+}).mount('#app');
