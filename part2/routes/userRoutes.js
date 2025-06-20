@@ -37,13 +37,13 @@ router.get('/me', (req, res) => {
 
 // POST login (changed version)
 router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
 
   try {
     const [rows] = await db.query(`
       SELECT user_id, username, role, password_hash FROM Users
-      WHERE email = ?
-    `, [email]);
+      WHERE username = ?
+    `, [username]);
 
     if (rows.length === 0) {
       return res.status(401).json({ success: false, message: 'User not found' });
@@ -54,6 +54,7 @@ router.post('/login', async (req, res) => {
     if (user.password_hash !== password) {
       return res.status(401).json({ success: false, message: 'Incorrect password' });
     }
+
     req.session.userId = user.user_id;
     req.session.username = user.username;
     req.session.role = user.role;
@@ -71,5 +72,6 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ success: false, message: 'Login failed due to server error' });
   }
 });
+
 
 module.exports = router;
