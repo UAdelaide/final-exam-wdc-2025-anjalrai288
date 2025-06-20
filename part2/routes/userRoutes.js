@@ -83,7 +83,9 @@ router.post('/logout',(req,res) => {
   });
 });
 
-router.get('/api/my-dogs',async (req, res) =>)
+router.get('/api/my-dogs',async (req, res) =>{
+  const ownerId
+})
 
 
 module.exports = router;
