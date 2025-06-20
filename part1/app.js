@@ -56,8 +56,8 @@ let db;
                 ('alice123', 'alice@example.com', 'hashed123', 'owner'),
                 ('bobwalker', 'bob@example.com', 'hashed456', 'walker'),
                 ('carol123', 'carol@example.com', 'hashed789', 'owner'),
-                ('ghjb456', 'david@example.com', 'securepass1', 'owner'),
-                ('evewalker', 'eve@example.com', 'securepass2', 'walker');
+                ('ghjb456', 'ghjb@example.com', 'securepass1', 'owner'),
+                ('dcs', 'eve@example.com', 'securepass2', 'walker');
             `);
             console.log('Users inserted.');
 
