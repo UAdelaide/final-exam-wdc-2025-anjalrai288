@@ -107,7 +107,9 @@ router.get('/api/dogs', async(req, res) =>{
       FROM Dogs
       JOIN Users ON Dogs.owner_id = Users.user_id`);
       res.json(rows);
-    } catch ()
+    } catch (err) {
+      res.status(500)
+    }
 
   }
 })
