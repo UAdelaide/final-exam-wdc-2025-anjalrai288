@@ -5,5 +5,5 @@ const db = require('../db');
 router.post('/login', async (req , res) =>{
     const { username , password} =req.body;
 
-    db.query
+    db.query('SELECT ')
 })
