@@ -82,7 +82,10 @@
           try{
             const res=await fetch('/api/users/me');
             if(!res.ok) throw new Error('Failed to fetch current user');
-            currentUser.value = awaitres.json
+            currentUser.value = awaitres.json();
+          } catch (err) {
+            error.
+          }
 
           }
 
