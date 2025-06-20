@@ -55,9 +55,11 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ success: false, message: 'Incorrect password' });
     }
 
-    req.session.userId = user.user_id;
-    req.session.username = user.username;
-    req.session.role = user.role;
+    req.session.user = {
+      user_id: user.user_id,
+      username: user.username,
+      role: user.role
+    };
 
     const redirectURL = user.role === 'owner' ? '/owner-dashboard.html' : '/walker-dashboard.html';
 
