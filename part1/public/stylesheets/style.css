@@ -1,0 +1,5 @@
+body {
+  background: linear-gradient(45deg, red, pink, blue, grey);
+  animation: bgShift 8s linear infinite;
+  color: rgb(18, 17, 18);
+  
