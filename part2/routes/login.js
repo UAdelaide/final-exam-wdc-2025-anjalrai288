@@ -17,7 +17,7 @@ router.post('/login', async (req , res) =>{
 
         req.session.userId = user.user_id;
         req.session.username = username;
-        req.
+        req.session.role=user.role;
 
 
 
