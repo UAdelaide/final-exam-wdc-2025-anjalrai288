@@ -9,7 +9,7 @@ app.use(session({
     secret: process.env.SESSION_SECRET || 'superecret',
     resave: false,
     saveUninitialized: false,
-    
+    cookie: {secure: false}
 })
 
 // Middleware
