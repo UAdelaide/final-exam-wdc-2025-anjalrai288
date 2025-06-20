@@ -40,7 +40,9 @@ let db;
       console.log('Connected to DogWalkService.');
 
       await db.beginTransaction();
-      try{}
+      try{
+        await db.execute
+      }
 
 
 
