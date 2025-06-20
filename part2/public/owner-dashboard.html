@@ -99,8 +99,8 @@
               headers: {'Content-Type': 'application/json'}
             });
 
-            const data = awaitres.json();
-            if (data.sucess){
+            const data = await res.json();
+            if (data.success){
               window.location.herf = '/index.html';
             }else{
               alert('Logout failed');
