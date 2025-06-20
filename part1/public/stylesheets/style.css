@@ -152,4 +152,7 @@ button {
   font-size: 18px;
   background: linear-gradient(90deg, rgba(255, 0, 0, 0.036), purple, yellow, green);
   border: 5px dotted cyan;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
   
