@@ -26,7 +26,7 @@
             <!-- changing here note -->
             <input v-model="form.dog_id" class="form-control" required>
             <option value="" disabled selected>Select your dog</option>
-            <option v-for="dog in dogs":value>
+            <option v-for="dog in dogs":value ="dog.dog_id">
           </div>
           <div class="mb-3">
             <label class="form-label">Requested Date & Time</label>
