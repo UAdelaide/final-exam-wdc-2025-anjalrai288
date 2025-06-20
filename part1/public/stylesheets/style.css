@@ -30,4 +30,9 @@ img {
     transform: translate(0, 0);
   }
 
+  25% {
+    box-shadow: 0 0 30px 15px rgb(166, 168, 166);
+    filter: brightness(1.2) hue-rotate(90deg);
+    transform: translate(2px, -2px);
+  }
   
