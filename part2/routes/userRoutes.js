@@ -41,17 +41,35 @@ router.post('/login', async (req, res) => {
 
   try {
     const [rows] = await db.query(`
-      SELECT user_id, username, role FROM Users
-      WHERE email = ? AND password_hash = ?
-    `, [email, password]);
+      SELECT user_id, username, role, password_hash FROM Users
+      WHERE email = ?
+    `, [email]);
 
     if (rows.length === 0) {
-      return res.status(401).json({ error: 'Invalid credentials' });
+      return res.status(401).json({ success: false, message: 'User not found' });
     }
 
-    res.json({ message: 'Login successful', user: rows[0] });
+    const user = rows[0];
+
+    // ⚠️ In real apps, use bcrypt.compare() here
+    if (user.password_hash !== password) {
+      return res.status(401).json({ success: false, message: 'Incorrect password' });
+    }
+    req.session.userId = user.user_id;
+    req.session.username = user.username;
+    req.session.role = user.role;
+
+    const redirectURL = user.role === 'owner' ? '/owner-dashboard.html' : '/walker-dashboard.html';
+
+    res.json({
+      success: true,
+      message: 'Login successful',
+      redirect: redirectURL
+    });
+
   } catch (error) {
-    res.status(500).json({ error: 'Login failed' });
+    console.error('Login error:', error);
+    res.status(500).json({ success: false, message: 'Login failed due to server error' });
   }
 });
 
