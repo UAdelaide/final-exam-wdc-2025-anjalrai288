@@ -89,7 +89,7 @@ router.get('/api/my-dogs',async (req, res) =>{
     return res.status(401).json({error: 'Not logged in'});
   }
   try{
-    const [rows] = await db.
+    const [rows] = await db.query('SELECT dog_id')
   }
 })
 
