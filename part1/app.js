@@ -61,7 +61,7 @@ let db;
             `);
             console.log('Users inserted.');
 
-            await 
+            await db.execute('')
 
         }
 
