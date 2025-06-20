@@ -58,6 +58,7 @@ let db;
            ('carol123', 'carol@example.com', 'hashed789', 'owner'),
            ('davidowner', 'david@example.com', 'securepass1', 'owner'),
            ('evewalker', 'eve@example.com', 'securepass2', 'walker');')
+           console.log('Users inserted.');
       }
 
 
