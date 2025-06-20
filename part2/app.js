@@ -8,6 +8,8 @@ const session= require('express-session');
 app.use(session({
     secret: process.env.SESSION_SECRET || 'superecret',
     resave: false,
+    saveUninitialized: false,
+    
 })
 
 // Middleware
