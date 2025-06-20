@@ -83,7 +83,9 @@ let db;
             `);
             console.log('WalkRequests inserted.');
         }
-    }catch ()
+    }catch (err) {
+        console.error)
+    }
 
 
 
