@@ -37,7 +37,7 @@ let db;
         database: 'DogWalkService'
       });
 
-      console.log('Connected to DogWalk')
+      console.log('Connected to DogWalkService.');
 
 
 
