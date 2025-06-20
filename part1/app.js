@@ -71,3 +71,80 @@ let db;
     console.error('Error setting up database. Ensure MySQL is running: service mysql start', err);
 }
 })();
+
+
+app.get('/api/dogs', async (req, res) => {
+    try {
+        const [rows] = await db.execute(`
+            SELECT
+                d.name AS dog_name, d.size, u.username AS owner_username
+            FROM Dogs d
+            JOIN Users u ON d.owner_id = u.user_id
+            WHERE u.role = 'owner'
+        `);
+        res.json(rows);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error', message: error.message });
+    }
+});
+
+app.get('/api/walkrequests/open', async (req, res) => {
+    try {
+        const [rows] = await db.execute(`
+            SELECT
+                wr.request_id, d.name AS dog_name, wr.requested_time, wr.duration_minutes, wr.location, u.username AS owner_username
+            FROM WalkRequests wr
+            JOIN Dogs d ON wr.dog_id = d.dog_id
+            JOIN Users u ON d.owner_id = u.user_id
+            WHERE wr.status = 'open'
+        `);
+        res.json(rows);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error', message: error.message });
+    }
+});
+
+app.get('/api/walkers/summary', async (req, res) => {
+    try {
+        const [rows] = await db.execute(`
+            SELECT u.username AS walker_username,
+                   COUNT(DISTINCT wq.request_id) AS completed_walks,
+                   COALESCE(AVG(wrat.rating), 0.0) AS average_rating,
+                   COUNT(wrat.rating_id) AS total_ratings
+            FROM Users u
+            LEFT JOIN WalkApplications wa ON u.user_id = wa.walker_id AND wa.status = 'accepted'
+            LEFT JOIN WalkRequests wq ON wa.request_id = wq.request_id AND wq.status = 'completed'
+            LEFT JOIN WalkRatings wrat ON wrat.request_id = wq.request_id AND u.user_id = wrat.walker_id
+            WHERE u.role = 'walker'
+            GROUP BY u.user_id
+            ORDER BY u.username
+        `);
+
+        const formattedRows = rows.map(row => {
+            const avg = parseFloat(row.average_rating);
+            return {
+                walker_username: row.walker_username,
+                completed_walks: row.completed_walks,
+                average_rating: row.total_ratings > 0 && !isNaN(avg) ? avg.toFixed(1) : null,
+                total_ratings: row.total_ratings
+            };
+        });
+
+        res.json(formattedRows);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error', message: error.message });
+    }
+});
+
+app.get('/', async (req, res) => {
+    try {
+        const [books] = await db.execute('SELECT * FROM books');
+        res.json(books);
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to fetch books' });
+    }
+});
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+module.exports = app;
