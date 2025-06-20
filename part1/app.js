@@ -49,7 +49,8 @@ let db;
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )`);
 
-        await
+        await db.execute(`
+            `)
 
 
             await db.execute(`
