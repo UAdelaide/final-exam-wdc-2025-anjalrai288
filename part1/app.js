@@ -81,11 +81,11 @@ let db;
         // Insert dogs (only Max and Bella for sample output)
         await db.execute(`
             INSERT INTO Dogs (owner_id, name, size) VALUES
-((SELECT user_id FROM Users WHERE username = 'alice123'), 'Max', 'medium'),
-((SELECT user_id FROM Users WHERE username = 'carol123'), 'Bella', 'small'),
-((SELECT user_id FROM Users WHERE username = 'carol123'), 'Cha', 'large'),
-((SELECT user_id FROM Users WHERE username = 'alice123'), 'Ram', 'small'),
-((SELECT user_id FROM Users WHERE username = 'carol123'), 'Rai', 'medium');
+            ((SELECT user_id FROM Users WHERE username = 'alice123'), 'Max', 'medium'),
+            ((SELECT user_id FROM Users WHERE username = 'carol123'), 'Bella', 'small'),
+            ((SELECT user_id FROM Users WHERE username = 'carol123'), 'Cha', 'large'),
+            ((SELECT user_id FROM Users WHERE username = 'alice123'), 'Ram', 'small'),
+            ((SELECT user_id FROM Users WHERE username = 'carol123'), 'Rai', 'medium');
         `);
 
         // Insert walk requests (only one open for sample)
