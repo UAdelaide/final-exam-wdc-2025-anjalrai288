@@ -24,7 +24,6 @@ let db;
 
     console.log('✅ Connected to DogWalkService database.');
 
-    // Optional: Insert demo users if needed
     const [users] = await db.execute('SELECT COUNT(*) AS count FROM Users');
     if (users[0].count === 0) {
       await db.execute(`
