@@ -230,6 +230,8 @@ app.get('/api/walkrequests/open', async (req, res) => {
     }
 });
 
+// /api/walkers/summary
+// Return a summary of each walker with their average rating and number of completed walks.
 app.get('/api/walkers/summary', async (req, res) => {
     try {
         if (!db) { // Check if db connection is established
@@ -257,6 +259,7 @@ app.get('/api/walkers/summary', async (req, res) => {
                 u.username;
         `);
 
+        // Format average_rating to one decimal place as per sample if it's not null
         const formattedRows = rows.map(row => ({
             walker_username: row.walker_username,
             total_ratings: row.total_ratings,
@@ -271,6 +274,6 @@ app.get('/api/walkers/summary', async (req, res) => {
     }
 });
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'))); // Keep static file serving
 
-module.exports = app;
+module.exports = app; // Export the app for use by bin/www or direct server start
