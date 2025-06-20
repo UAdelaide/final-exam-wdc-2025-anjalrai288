@@ -13,31 +13,24 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 
-let db; // Global variable to hold the database connection
+let db;
 
 
-// Asynchronous IIFE (Immediately Invoked Function Expression) to set up the database
 (async () => {
  try {
-   // Establish connection to MySQL server
    const connection = await mysql.createConnection({
      host: 'localhost',
      user: 'root',
-     password: '' // IMPORTANT: Set your MySQL root password here if you have one
+     password: ''
    });
 
-
-   // Create the DogWalkService database if it doesn't exist.
-   // This is optional if you've already run dogwalks.sql, but good for robustness.
    await connection.query('CREATE DATABASE IF NOT EXISTS DogWalkService');
-   await connection.end(); // End the initial connection
+   await connection.end();
 
-
-   // Now connect to the DogWalkService database
    db = await mysql.createConnection({
      host: 'localhost',
      user: 'root',
-     password: '', // IMPORTANT: Set your MySQL root password here
+     password: '', 
      database: 'DogWalkService' // Connect to our specific database
    });
 
