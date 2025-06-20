@@ -62,7 +62,7 @@ let db;
        console.log('Users inserted.');
 
 
-       // 2. Insert Dogs (using subqueries for owner_id)
+       // 2. Insert Dogs 
        await db.execute(`
            INSERT INTO Dogs (owner_id, name, size)
            VALUES
@@ -75,7 +75,7 @@ let db;
        console.log('Dogs inserted.');
 
 
-       // 3. Insert WalkRequests (using subqueries for dog_id and owner_id indirectly for clarity)
+       // 3. Insert WalkRequests
        await db.execute(`
            INSERT INTO WalkRequests (dog_id, requested_time, duration_minutes, location, status)
            VALUES
@@ -88,7 +88,7 @@ let db;
        console.log('WalkRequests inserted.');
 
 
-       // 4. Insert WalkApplications (example data for testing /api/walkers/summary later)
+       // 4. Insert WalkApplications
        await db.execute(`
            INSERT INTO WalkApplications (request_id, walker_id, status)
            VALUES
