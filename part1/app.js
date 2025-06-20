@@ -124,7 +124,7 @@ app.get('/api/dogs', async (req, res) => {
 
 app.get('/api/walkrequests/open', async (req, res) => {
    try {
-       if (!db) { // Check if db connection is established
+       if (!db) {
            return res.status(503).json({ error: 'Database not initialized.' });
        }
        const [rows] = await db.execute(`
@@ -144,19 +144,16 @@ app.get('/api/walkrequests/open', async (req, res) => {
            WHERE
                wr.status = 'open';
        `);
-       res.json(rows); // Return as JSON
+       res.json(rows);
    } catch (error) {
        console.error('Error fetching open walk requests:', error);
        res.status(500).json({ error: 'Internal server error', message: error.message });
    }
 });
 
-
-// /api/walkers/summary
-// Return a summary of each walker with their average rating and number of completed walks.
 app.get('/api/walkers/summary', async (req, res) => {
    try {
-       if (!db) { // Check if db connection is established
+       if (!db) {
            return res.status(503).json({ error: 'Database not initialized.' });
        }
        const [rows] = await db.execute(`
@@ -181,9 +178,6 @@ app.get('/api/walkers/summary', async (req, res) => {
                u.username;
        `);
 
-
-       // Format average_rating to one decimal place as per sample if it's not null.
-       // Also handle the case where total_ratings is 0, returning null for average_rating.
        const formattedRows = rows.map(row => {
            // Use parseFloat directly on the database result. This is the most robust way to ensure a number.
            // It will convert numeric strings (like '4.5') to numbers, and non-numeric to NaN.
