@@ -19,7 +19,9 @@ router.post('/login', async (req , res) =>{
         req.session.username = username;
         req.session.role=user.role;
 
-        if(user.role)
+        if(user.role === 'owner'){
+            return
+        }
 
 
 
