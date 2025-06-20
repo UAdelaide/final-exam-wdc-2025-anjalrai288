@@ -42,7 +42,7 @@ let db;
       await db.beginTransaction();
       try{
         await db.execute('SET FOREIGN_KEY_CHECK_CHECKS');
-        await db.
+        await db.execute('');
       }
 
 
