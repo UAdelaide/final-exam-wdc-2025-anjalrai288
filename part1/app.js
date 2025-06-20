@@ -41,7 +41,7 @@ let db;
 
       await db.beginTransaction();
       try{
-        await db.execute
+        await db.execute('')
       }
 
 
