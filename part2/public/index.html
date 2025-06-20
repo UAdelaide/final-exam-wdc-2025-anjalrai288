@@ -15,13 +15,16 @@
     <div class="login-container">
       <form @submit.prevent="handleLogin">
         <div class="form-group">
+          <label for="username">Username:</label>
+          <input type="text" id="username" v-model="username" class="form-control" required>
+        </div>
+        <div class="form-group">
           <label for="password">Password:</label>
-          <input type="text" id="username" v-model="username" class=" form-control" required>
-          </div>
-          <div class="form-group">
-            <label for="password> Password: </label>
-            <input type= "password" id="password" v-model="password" class="form-control" required>
-          </div>
+          <input type="password" id="password" v-model="password" class="form-control" required>
+        </div>
+        <button type="submit" class="login-button">Log In</button>
+        <p v-if="loginError" class="error-message">{{ loginError }}</p>
+        
 
     <a href="owner-dashboard.html" class="btn btn-outline-primary me-2">Owner Dashboard</a>
     <a href="walker-dashboard.html" class="btn btn-outline-success">Walker Dashboard</a>
