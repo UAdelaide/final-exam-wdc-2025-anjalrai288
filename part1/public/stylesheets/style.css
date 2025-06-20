@@ -3,7 +3,7 @@ body {
   animation: bgShift 8s linear infinite;
   color: rgb(18, 17, 18);
   font-family: 'Comic Sans MS', cursive, sans-serif;
-  text-align: bottom;
+  text-align: center;
   user-select: none;
 }
 
@@ -20,7 +20,7 @@ img {
   filter: hue-rotate(180deg) brightness(1.5) contrast(2);
   animation: jitterGlow 1.5s infinite alternate, spinWeird 10s linear infinite;
   margin-top: 20px;
-  transform-origin: center bottom;
+  transform-origin: center ;
 }
 
 @keyframes jitterGlow {
