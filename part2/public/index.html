@@ -96,6 +96,9 @@
                 const imgData = await imgRes.json();
                 dog.image = imgData.message;
               } catch {
+                dog.image = 'https://via.placeholder.com/100x100.png?text=Dog';
+              }
+            }
 
       }
     }).mount('#app');
