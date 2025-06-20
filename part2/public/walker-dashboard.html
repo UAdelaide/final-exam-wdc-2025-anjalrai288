@@ -91,6 +91,10 @@
 
         async function applyToWalk(requestId) {
           try {
+                if (!currentUser.value) {
+                  throw new Error('User not available');
+                }
+          try {
             const res = await fetch(`/api/walks/${requestId}/apply`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
