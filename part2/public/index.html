@@ -35,12 +35,34 @@
     createApp({
       data() {
         return {
-          message: 'Welcome to the Dog Walking Service!'
+          message: 'Welcome to the Dog Walking Service!',
+          username: '',
+          password: '',
+          loginError: ''
         };
+      },
+      methods: {
+        async handleLogin() {
+          try {
+            const res = await fetch('/login', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                username: this.username,
+                password: this.password
+              })
+            });
+
+            const data = await res.json();
+            if (data.success) {
+              window.location.href = data.redirect;
+            } else {
+              this.loginError = data.message;
+            }
+          } catch (err) {
+            this.loginError = 'Login failed. Please try again.';
+          }
+        }
       }
     }).mount('#app');
   </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
