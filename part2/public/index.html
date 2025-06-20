@@ -44,7 +44,7 @@
       methods: {
         async handleLogin() {
           try {
-            const res = await fetch('/login', {
+            const res = await fetch('/api/users/login', { 
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
@@ -57,9 +57,10 @@
             if (data.success) {
               window.location.href = data.redirect;
             } else {
-              this.loginError = data.message;
+              this.loginError = data.message || 'Invalid username or password.';
             }
           } catch (err) {
+            console.error('Login error:', err);
             this.loginError = 'Login failed. Please try again.';
           }
         }
