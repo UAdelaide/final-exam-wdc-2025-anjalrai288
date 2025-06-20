@@ -70,43 +70,6 @@ let db;
         `);
 
         await db.execute(`
-            CREATE TABLE IF NOT EXISTS WalkApplications (
-                application_id INT AUTO_INCREMENT PRIMARY KEY,
-                request_id INT NOT NULL,
-                walker_id INT NOT NULL,
-                status ENUM('pending', 'accepted', 'rejected') DEFAULT 'pending',
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                FOREIGN KEY (request_id) REFERENCES WalkRequests(request_id) ON DELETE CASCADE,
-                FOREIGN KEY (walker_id) REFERENCES Users(user_id) ON DELETE CASCADE
-            )
-        `);
-
-        await db.execute(`
-            CREATE TABLE IF NOT EXISTS WalkRatings (
-                rating_id INT AUTO_INCREMENT PRIMARY KEY,
-                request_id INT NOT NULL,
-                walker_id INT NOT NULL,
-                owner_id INT NOT NULL,
-                rating INT NOT NULL CHECK (rating BETWEEN 1 AND 5),
-                comments TEXT,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                FOREIGN KEY (request_id) REFERENCES WalkRequests(request_id) ON DELETE CASCADE,
-                FOREIGN KEY (walker_id) REFERENCES Users(user_id) ON DELETE CASCADE,
-                FOREIGN KEY (owner_id) REFERENCES Users(user_id) ON DELETE CASCADE
-            )
-        `);
-
-        // Clear existing data (optional: comment this out if you want persistent data)
-        await db.execute('SET FOREIGN_KEY_CHECKS=0;');
-        await db.execute('TRUNCATE TABLE WalkRatings;');
-        await db.execute('TRUNCATE TABLE WalkApplications;');
-        await db.execute('TRUNCATE TABLE WalkRequests;');
-        await db.execute('TRUNCATE TABLE Dogs;');
-        await db.execute('TRUNCATE TABLE Users;');
-        await db.execute('SET FOREIGN_KEY_CHECKS=1;');
-
-        // Insert users (owners and walkers)
-        await db.execute(`
             INSERT INTO Users (username, email, password_hash, role) VALUES
             ('alice123', 'alice@example.com', 'hashed123', 'owner'),
             ('carol123', 'carol@example.com', 'hashed789', 'owner'),
