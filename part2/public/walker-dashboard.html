@@ -81,7 +81,10 @@
 
         async function getCurrentUser() {
           try{
-            const res=await fetch('/api/users/me');
+            const res = await fetch('/api/users/me', {
+      method: 'GET',
+      credentials: 'include'  // 👈 this is required to send session cookie
+    });
             if(!res.ok) throw new Error('Failed to fetch current user');
             currentUser.value = awaitres.json();
           } catch (err) {
