@@ -21,7 +21,7 @@ router.post('/login', async (req, res) => {
     if (user.role === 'owner') {
       return res.json({ success: true, redirect: '/owner/dashboard' });
     } else {
-        return res.json({ success: true, redirect: '/walker/dashboard' });
+        return res.json({ success: true, redirect: '/walker-dash' });
     }
   });
 });
