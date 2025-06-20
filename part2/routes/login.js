@@ -6,5 +6,5 @@ router.post('/login', async (req , res) =>{
     const { username , password} =req.body;
 
     db.query('SELECT * FROM USERS WHERE username = ?', [username],(err, result) => {
-        if (err) result )
+        if (err) result res.status=500 )
 })
