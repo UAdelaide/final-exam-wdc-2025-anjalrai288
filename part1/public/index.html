@@ -1,20 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8" />
-   <title>Dog Walking Service - Weird Dog of the Day</title>
-   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <meta charset="UTF-8" />
+  <title>Dog Walking Service - Weird Dog of the Day</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
   <link rel="stylesheet" href="stylesheets/style.css" />
+  <style>
+    @keyframes FlickeringRainbow {
+      0% { color: red; text-shadow: 0 0 15px rgba(255, 0, 0, 0); }
+      25% { color: lime; text-shadow: 0 0 15px rgba(0, 255, 0, 0); }
+      50% { color: blue; text-shadow: 0 0 15px rgba(0, 0, 255, 0); }
+      75% { color: yellow; text-shadow: 0 0 15px rgba(255, 255, 0, 0); }
+      100% { color: magenta; text-shadow: 0 0 15px rgba(255, 0, 255, 0); }
+    }
+
+    @keyframes backgroundFlash {
+      0% {background-color: rgba(255, 0, 0, 0);}
+      25% {background-color: lime;}
+      50% {background-color: yellow;}
+      75% {background-color: rgb(111, 0, 255);}
+      100% {background-color: pink;}
+    }
+
+    @keyframes jitterGlow {
+      0% {box-shadow: 0 0 10px magenta; transform: translate(0, 0);}
+      50% {box-shadow: 0 0 30px cyan; transform: translate(5px, -5px);}
+      100% {box-shadow: 0 0 10px magenta; transform: translate(0, 0);}
+    }
+
+    @keyframes spinWeird {
+      0% {transform: rotate(0deg) scaleX(1) scaleY(1);}
+      50% {transform: rotate(180deg) scaleX(2) scaleY(0.5);}
+      100% {transform: rotate(360deg) scaleX(1) scaleY(1);}
+    }
+
+    @keyframes zoomText {
+      0% {transform: scale(1);}
+      100% {transform: scale(1.5) rotate(5deg);}
+    }
+
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      animation: backgroundFlash 0.2s infinite alternate;
+      color: rgb(18, 17, 18);
+      font-size: 12px;
+      text-align: center;
+      user-select: none;
+      cursor: none;
+    }
+
+    h1 {
+      font-size: 90px;
+      animation: FlickeringRainbow 0.3s infinite alternate;
+      transform: rotate(-3deg);
+    }
+
+    img {
+      width: 100px;
+      height: 100px;
+      border: 7px dashed yellow;
+      filter: hue-rotate(720deg) contrast(3) saturate(200%);
+      animation: spinWeird 1s infinite linear, jitterGlow 0.5s infinite alternate;
+      margin-bottom: 60px;
+    }
+
+    p {
+      font-size: 8px;
+      color: cyan;
+      animation: zoomText 1s infinite alternate;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 30px;
+      font-size: 18px;
+      background: linear-gradient(90deg, red, purple, yellow, green);
+      border: 5px dotted cyan;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      animation: spinWeird 2s linear infinite;
+    }
+
+    .fake-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 50px;
+      font-size: 25px;
+      background: repeating-linear-gradient(45deg, red, yellow 10px, green 20px);
+      border: 5px groove magenta;
+      color: black;
+      z-index: 999;
+    }
+  </style>
 </head>
 <body>
-    <div id="app">
-      <h1> Dog of the Day! </h1>
-      <img :src="dogImage" />
-      <p>Name: tom roy</p>
-    <p>Breed: guess!! </p>
+  <div id="app">
+    <h1> Dog of the Day! </h1>
+    <img :src="dogImage" alt="Dog" />
+    <p>Name: tom roy</p>
+    <p>Breed: guess!!</p>
     <button @click="reloadDog">change doggy</button>
+    <p style="font-size:2px;color:black;background:black">nonsense garbled glitch portal doggy</p>
   </div>
+  <button class="fake-button">???</button>
+  <audio autoplay loop>
+    <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" type="audio/mpeg">
+  </audio>
+  <script>
+    const { createApp } = Vue;
 
-  <script src="javascripts/script.js"></script>
+    createApp({
+      data() {
+        return {
+          dogImage: ''
+        };
+      },
+      methods: {
+        async reloadDog() {
+          try {
+            const res = await fetch('https://dog.ceo/api/breeds/image/random');
+            const data = await res.json();
+            this.dogImage = data.message;
+          } catch {
+            this.dogImage = '';
+            alert('No weird dog today!');
+          }
+        }
+      },
+      mounted() {
+        this.reloadDog();
+      }
+    }).mount('#app');
+  </script>
 </body>
 </html>
