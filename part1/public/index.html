@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <title>Dog Walking Service - Weird Dog of the Day</title>
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
-  <link rel="stylesheet" href="stylesheets/style.css" />
   <style>
     @keyframes FlickeringRainbow {
       0% { color: red; text-shadow: 0 0 15px rgba(255, 0, 0, 0); }
@@ -44,36 +43,50 @@
       animation: backgroundFlash 0.2s infinite alternate;
       color: rgb(18, 17, 18);
       font-size: 12px;
-      text-align: center;
       user-select: none;
       cursor: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    #app {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 50px;
+      min-height: 100vh;
+      box-sizing: border-box;
     }
 
     h1 {
       font-size: 90px;
       animation: FlickeringRainbow 0.3s infinite alternate;
       transform: rotate(-3deg);
+      margin-bottom: 30px;
+      text-align: center;
     }
 
     img {
-      width: 100px;
-      height: 100px;
+      width: 150px;
+      height: 150px;
       border: 7px dashed yellow;
       filter: hue-rotate(720deg) contrast(3) saturate(200%);
       animation: spinWeird 1s infinite linear, jitterGlow 0.5s infinite alternate;
-      margin-bottom: 60px;
+      margin-bottom: 30px;
     }
 
     p {
-      font-size: 8px;
+      font-size: 14px;
       color: cyan;
       animation: zoomText 1s infinite alternate;
+      margin: 5px 0;
     }
 
     button {
-      margin-top: 15px;
-      padding: 10px 30px;
-      font-size: 18px;
+      margin-top: 25px;
+      padding: 12px 40px;
+      font-size: 20px;
       background: linear-gradient(90deg, red, purple, yellow, green);
       border: 5px dotted cyan;
       color: black;
@@ -83,7 +96,7 @@
     }
 
     .fake-button {
-      position: absolute;
+      position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
@@ -93,22 +106,25 @@
       border: 5px groove magenta;
       color: black;
       z-index: 999;
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
   <div id="app">
-    <h1> Dog of the Day! </h1>
+    <h1>Dog of the Day!</h1>
     <img :src="dogImage" alt="Dog" />
     <p>Name: tom roy</p>
     <p>Breed: guess!!</p>
     <button @click="reloadDog">change doggy</button>
-    <p style="font-size:2px;color:black;background:black">nonsense garbled glitch portal doggy</p>
   </div>
+
   <button class="fake-button">???</button>
+
   <audio autoplay loop>
     <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" type="audio/mpeg">
   </audio>
+
   <script>
     const { createApp } = Vue;
 
